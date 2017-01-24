@@ -14,6 +14,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import djcelery
+
+djcelery.setup_loader()
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,11 +50,14 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+    'djcelery'
 ]
 
 PROJECT_APPS = [
     'project.apps.accounts',
+    'project.apps.utils',
+    'project.apps.search'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -155,6 +162,10 @@ STATIC_ROOT = os.path.join(DATA_DIR, '..', 'public', 'static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+BROKER_URL = 'redis://localhost:6379/1'
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+
 
 
 try:

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import authentication
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 
 
-class AdminAccessMixin(object):
+class UserAccessMixin(object):
     authentication_classes = (
         authentication.SessionAuthentication,
         authentication.TokenAuthentication,
     )
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
 
 class PaginateConfig(PageNumberPagination):
