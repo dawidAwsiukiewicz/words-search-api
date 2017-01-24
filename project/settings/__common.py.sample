@@ -1,0 +1,14 @@
+EMAIL_PORT = 1025
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'NAME': 'words-search-api',
+        'PASSWORD': 'secret-password',
+        'PORT': '',
+        'USER': 'localhost'
+
+    }
+}
