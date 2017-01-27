@@ -7,12 +7,13 @@ from project.apps.utils.models import CreatedAbstract
 
 
 class Page(CreatedAbstract):
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     url = models.URLField(verbose_name=_(u"url"))
     status = models.SmallIntegerField(_(u"status"), choices=PAGE_STATUS_CHOICES, default=page_status_started)
 
     objects = PageStatusObjectManager()
+
+    def __unicode__(self):
+        return self.url
 
     class Meta:
         verbose_name = _(u"Strona")
@@ -27,3 +28,6 @@ class Word(CreatedAbstract):
     class Meta:
         verbose_name = _(u"Słowo")
         verbose_name_plural = _(u"Słowa")
+
+    def __unicode__(self):
+        return "%s - %s" % (self.page, self.word)
