@@ -4,6 +4,7 @@ from django.conf import settings
 from project.apps.search.models import Page, Word
 from project.apps.search.tasks import find_word
 from rest_framework import serializers
+from django.utils.translation import ugettext as _
 
 
 class PageSerializer(serializers.ModelSerializer):
@@ -21,7 +22,7 @@ class PageSerializer(serializers.ModelSerializer):
         file = request.FILES['file']
 
         if file.content_type not in settings.ALLOWED_CONTENT_TYPE:
-            raise serializers.ValidationError(u'Błędny typ pliku')
+            raise serializers.ValidationError(_(u'Błędny typ pliku'))
 
         bad_url_list = []
         words_list = data.get("words", None).split(",")

@@ -40,5 +40,5 @@ class LogoutView(APIView):
 
         logout(request)
 
-        return Response({"success": _("Wylogowano poprawnie.")},
+        return Response({"success": _(u"Wylogowano poprawnie.")},
                         status=status.HTTP_200_OK)

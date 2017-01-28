@@ -16,11 +16,7 @@ class UserAuthTokenSerializer(serializers.Serializer):
         if username and password:
             user = authenticate(username=username, password=password)
 
-            if user:
-                if not user.is_active:
-                    msg = _(u'To konto zostało wyłączone')
-                    raise exceptions.ValidationError(msg)
-            else:
+            if not user:
                 msg = _(u"Zły login lub hasło")
                 raise exceptions.ValidationError(msg)
         else:

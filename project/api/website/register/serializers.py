@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth import get_user_model
-from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
+from django.utils.translation import ugettext as _
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.Serializer):
-
     class Meta:
         model = get_user_model()
         fields = ('email', 'password')
@@ -24,5 +24,5 @@ class UserSerializer(serializers.Serializer):
 
         user, _created = get_user_model().objects.get_or_create(email=data.get("email"), username=data.get("email"), defaults={'password': validated_data['password']})
         if not _created:
-            raise serializers.ValidationError(u'Użytkownik o taki adresie email już istnieje')
+            raise serializers.ValidationError(_(u'Użytkownik o taki adresie email już istnieje'))
         return user
